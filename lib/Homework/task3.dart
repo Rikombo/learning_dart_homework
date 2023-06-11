@@ -1,4 +1,6 @@
-// Do the same task, but add a third parameter c.
+/* Do the same task, but add a third parameter c.
+
+ */
 void main() {
   int a = 35;
   int b = 17;
