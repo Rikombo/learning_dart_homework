@@ -30,6 +30,54 @@ void main() {
   );
   bus.filledSeatsCount = 50;
   print('Bus color: ${bus.color}');
+
+  final car = Car(tyres: 4, maxSpeed: 280, model: 'audi', color: 'red');
+  final driver1 = Driver(name: 'Valentins Stepanovs', licence: LicenceType.car);
+  print(driver1.canDriveVehicle(bus));
+  driver1.addVehicle(car);
+
+  for (Vehicle vehicle in driver1.ownedVehicles) {
+    print('Vehicle Model: ${vehicle.model}, MaxSpeed: ${vehicle.maxSpeed}, Color: ${vehicle.color}');
+  }
+}
+
+
+enum LicenceType { car, bus }
+
+class Driver {
+  Driver({
+    required this.name,
+    required this.licence
+});
+  final String name;
+  final LicenceType licence;
+  final List<Vehicle> ownedVehicles = [];
+
+  bool canDriveVehicle(Vehicle vehicle) {
+    if (vehicle == Car && licence == LicenceType.bus) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void addVehicle(Vehicle vehicle) {
+    ownedVehicles.add(vehicle);
+  }
+
+  void removeVehicle(Vehicle modelName) {
+    ownedVehicles.removeWhere((vehicle) => vehicle.model == modelName);
+  }
+}
+
+class Car extends Vehicle {
+  Car ({
+    required this.tyres,
+    required int maxSpeed,
+    required String model,
+    required String color,
+}) : super(maxSpeed: maxSpeed, model: model, color: color);
+  final int tyres;
 }
 
 class Bus extends Vehicle {
