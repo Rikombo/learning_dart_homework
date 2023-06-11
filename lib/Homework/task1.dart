@@ -1,6 +1,6 @@
 // Write a function that calculates the difference of a and b.
 // Return type: int Params: required named a and b without default values
-// Name of function: difference
+// Name of function: difference.
 
 void main() {
   int a = 35;
