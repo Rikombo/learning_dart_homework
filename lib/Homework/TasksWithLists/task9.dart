@@ -5,10 +5,4 @@ void main() {
   print(primeCheck(number));
 }
 
-bool primeCheck(int number) {
-  if (number % 2 == 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
+bool primeCheck(int number) => number % 2 == 0;
