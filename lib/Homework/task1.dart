@@ -7,7 +7,6 @@ void main() {
   int b = 17;
   final result = difference(a: a, b: b);
   print(result);
-
 }
 
 int difference({required int a, required int b}) => a - b;

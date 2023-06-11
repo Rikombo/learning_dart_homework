@@ -9,7 +9,6 @@ void main() {
   int b = 17;
   int result = average(a: a, b: b);
   print(result);
-
 }
 
 int average({required int a, required int b}) => (a + b) ~/ 2;
