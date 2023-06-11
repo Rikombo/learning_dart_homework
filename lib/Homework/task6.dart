@@ -6,15 +6,16 @@ It should not return a value. The name of the function is checkAge.
  */
 
 void main() {
-checkAge(16);
-checkAge(35);
-checkAge(81);
+  checkAge(16);
+  checkAge(35);
+  checkAge(65);
+  checkAge(81);
 }
 
 void checkAge(int age) {
-  if (age < 18) {
+  if (age <= 18) {
     print("junior");
-  } else if (age < 65) {
+  } else if (age <= 65) {
     print("middle");
   } else {
     print("senior");
