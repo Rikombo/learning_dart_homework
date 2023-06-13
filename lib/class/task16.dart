@@ -24,21 +24,82 @@
 void main() {
   final bus = Bus(
     seatingCapacity: 50,
+    id: '2',
     maxSpeed: 100,
     model: 'bmw',
     color: 'green',
   );
   bus.filledSeatsCount = 50;
   print('Bus color: ${bus.color}');
+
+  final carAudi =
+      Car(id: '1', tyres: 4, maxSpeed: 280, model: 'audi', color: 'red');
+  final carBmw =
+      Car(tyres: 4, id: '3', maxSpeed: 300, model: 'bmw', color: 'green');
+  final driver1 = Driver(name: 'Valentins Stepanovs', licence: LicenceType.car);
+  print(driver1.canDriveVehicle(bus));
+  driver1.addVehicle(carAudi);
+  driver1.addVehicle(carBmw);
+
+  printOwnedVehicles(driver1);
+
+  driver1.removeVehicle('1');
+
+  printOwnedVehicles(driver1);
+}
+
+void printOwnedVehicles(Driver driver) {
+  for (Vehicle vehicle in driver.ownedVehicles) {
+    print(
+        'Vehicle Model: ${vehicle.model}, MaxSpeed: ${vehicle.maxSpeed}, Color: ${vehicle.color}');
+  }
+}
+
+enum LicenceType { car, bus }
+
+class Driver {
+  Driver({required this.name, required this.licence});
+
+  final String name;
+  final LicenceType licence;
+  final List<Vehicle> ownedVehicles = [];
+
+  bool canDriveVehicle(Vehicle vehicle) {
+    if (vehicle is Car && licence == LicenceType.bus) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void addVehicle(Vehicle vehicle) {
+    ownedVehicles.add(vehicle);
+  }
+
+  void removeVehicle(String id) {
+    ownedVehicles.removeWhere((vehicle) => vehicle.id == id);
+  }
+}
+
+class Car extends Vehicle {
+  Car({
+    required this.tyres,
+    required String id,
+    required int maxSpeed,
+    required String model,
+    required String color,
+  }) : super(id: id, maxSpeed: maxSpeed, model: model, color: color);
+  final int tyres;
 }
 
 class Bus extends Vehicle {
   Bus({
     required this.seatingCapacity,
+    required String id,
     required int maxSpeed,
     required String model,
     required String color,
-  }) : super(maxSpeed: maxSpeed, model: model, color: color);
+  }) : super(id: id, maxSpeed: maxSpeed, model: model, color: color);
 
   final int seatingCapacity;
   int _filledSeatsCount = 0;
@@ -56,19 +117,24 @@ class Bus extends Vehicle {
 
 abstract class Vehicle {
   // private
+  late String _id;
   late int _maxSpeed;
   late String _model;
   late String _color;
 
   Vehicle({
+    required String id,
     required int maxSpeed,
     required String model,
     required String color,
   }) {
+    _id = id;
     _maxSpeed = maxSpeed;
     _model = model;
     _color = color;
   }
+
+  String get id => _id;
 
   int get maxSpeed => _maxSpeed;
 

@@ -5,7 +5,7 @@ void main() {
 }
 
 void fizzBuzz(int n) {
-  List<dynamic> results = [];
+  List<String> results = [];
   for (int i = 1; i <= n; i++) {
     if (i % 3 == 0 && i % 5 == 0) {
       results.add('FizzBuzz');
@@ -14,7 +14,7 @@ void fizzBuzz(int n) {
     } else if (i % 5 == 0) {
       results.add('Buzz');
     } else {
-      results.add(i);
+      results.add('$i');
     }
   }
   print(results);
