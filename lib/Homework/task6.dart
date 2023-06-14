@@ -7,11 +7,7 @@ It should not return a value. The name of the function is checkAge.
 
 void main() {
   checkAge(16);
-  checkAge(18);
-  checkAge(35);
-  checkAge(65);
-  checkAge(81);
-  checkAge(999); // :P
+
 }
 
 void checkAge(int age) {
